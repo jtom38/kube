@@ -1,0 +1,44 @@
+---
+
+apiVersion: v1
+kind: PersistentVolume
+
+metadata:
+  name: pihole-etc-pihole
+
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: pihole-pihole
+  nfs:
+#    path: /kube/pihole/pihole
+#    server: 192.168.1.85
+    path: /mnt/nfsshare/kube/pihole/pihole
+    server: 192.168.1.222
+ 
+---
+apiVersion: v1
+kind: PersistentVolume
+
+metadata:
+  name: pihole-etc-dnsmasq
+
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: pihole-dnsmasq
+  nfs:
+#    path: /kube/pihole/dnsmasq
+#    server: 192.168.1.85
+    path: /mnt/nfsshare/kube/pihole/dnsmasq
+    server: 192.168.1.222
+ 
+

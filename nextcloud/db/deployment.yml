@@ -1,0 +1,50 @@
+
+---
+# nextcloud/db/
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nc-db
+  labels:
+    app: nc-db
+
+spec:
+  replicas: 1  
+  
+  selector: 
+    matchLabels:
+      app: nc-db
+
+  template:
+    metadata:
+      labels:
+        app: nc-db
+    
+    spec:
+      containers:
+        - name: nextcloud-sql
+          image: postgres:13.1-alpine
+          env:
+            - name: POSTGRES_PASSWORD 
+              value: password
+            - name: POSTGRES_USER 
+              value: nextcloud
+            - name: POSTGRES_DB
+              value: nextcloud
+          volumeMounts:
+            - name: nc-db-storage
+              mountPath: /var/lib/postgresql/data
+          ports:
+            - containerPort: 5432
+
+      volumes:
+        #- name: nc-local-sql-storage
+        #  hostPath:
+        #    path: /kube/nc/db
+        #    type: DirectoryOrCreate
+
+        - name: nc-db-storage
+          persistentVolumeClaim:
+            claimName: nc-db-nfs-pvc
+

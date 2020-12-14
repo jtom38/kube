@@ -3,11 +3,11 @@ apiVersion: v1
 kind: Service
 
 metadata:
-  name: nextcloud-service
+  name: nc-service
 
 spec:
   selector:
-    app: nextcloud      
+    app: nc-web 
   
   type: NodePort
   ports:

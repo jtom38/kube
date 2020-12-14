@@ -3,9 +3,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nextcloud-deployment
+  name: nextcloud-web
   labels:
-    app: nextcloud
+    app: nc
 
 spec:
   replicas: 1  
@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       labels:
-        app: nextcloud
+        app: nextcloudd
     
     spec:
       containers:
@@ -28,14 +28,14 @@ spec:
           ports:
             - containerPort: 80
           volumeMounts:
-            - name: nextcloud-storage
+            - name: nextcloud-web-storage
               mountPath: /var/www/html
         
               #- name: nextcloud-sql
           
 
       volumes:
-        - name: nextcloud-storage
+        - name: nextcloud-web-storage
           persistentVolumeClaim:
-            claimName: nextcloud-nfs-pvc
+            claimName: nextcoud-web-nfs-pvc
 

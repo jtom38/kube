@@ -1,0 +1,71 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pihole
+  labels:
+    app: pihole
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: pihole
+
+  template:
+    metadata:
+      labels:
+        app: pihole
+
+    spec:
+      # nodeSelector:
+      #  kubernetes.io/hostname: 'pihole'
+      containers:
+        - name: pihole
+          image: pihole/pihole:v5.2.1
+          env:
+            - name: WEBPASSWORD
+              value: pihole
+            - name: TZ
+              value: America/Los_Angeles
+          
+          securityContext:
+            privileged: true
+          
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+
+            - containerPort: 53
+              name: dns
+              protocol: TCP
+
+            - containerPort: 53
+              name: dns-udp
+              protocol: UDP
+
+            #- containerPort: 443
+            #  name: https
+            #  protocol: TCP
+
+            - containerPort: 67
+              name: client-udp
+              protocol: UDP
+
+          volumeMounts:
+            - name: pihole-etc-pihole
+              mountPath: /etc/pihole
+            - name: pihole-etc-dnsmasq
+              mountPath: /etc/dnsmasq
+
+      volumes:
+        - name: pihole-etc-pihole
+          persistentVolumeClaim:
+            claimName: pihole-etc-pihole-pvc
+
+        - name: pihole-etc-dnsmasq
+          persistentVolumeClaim:
+            claimName: pihole-etc-dnsmasq-pvc

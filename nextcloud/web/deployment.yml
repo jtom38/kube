@@ -1,0 +1,52 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nc-web
+  labels:
+    app: nc-web
+
+spec:
+  replicas: 1  
+  
+  selector: 
+    matchLabels:
+      app: nc-web
+
+  template:
+    metadata:
+      labels:
+        app: nc-web
+    
+    spec:
+      containers:
+        #restartPolicy: Always
+        - name: nextcloud
+          image: nextcloud:20.0.2-apache
+          env:
+            - name: POSTGRES_DB
+              value: nextcloud
+            - name: POSTGRES_USER
+              value: nextcloud
+            - name: POSTGRES_PASSWORD
+              value: password
+            - name: POSTGRES_HOST
+              value: nc-db-service
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nc-web-storage
+              #- name: nc-local-web-storage
+              mountPath: /var/www/html
+        
+      volumes:
+        #- name: nc-local-web-storage
+        #  hostPath:
+        #    path: /kube/nc/web/
+        #    type: DirectoryOrCreate
+
+        - name: nc-web-storage
+          persistentVolumeClaim:
+            claimName: nc-web-nfs-pvc
+

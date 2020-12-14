@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: nc-db-service
+
+spec:
+  selector:
+    app: nc-db 
+  
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+      nodePort: 30002
+    
+
+
