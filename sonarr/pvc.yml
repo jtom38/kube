@@ -1,0 +1,13 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nc-web-nfs-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+    #storageClassName: Filesystem
+  storageClassName: nfs
+  resources:
+    requests:
+      storage: 10Gi

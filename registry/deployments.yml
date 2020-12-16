@@ -1,0 +1,71 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registry
+  labels:
+    app: registry
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: registry
+
+  template:
+    metadata:
+      labels:
+        app: registry
+
+    spec:
+      # nodeSelector:
+      #  kubernetes.io/hostname: 'pihole'
+      containers:
+        - name: registry
+          #image: registry:2.7.1
+          image: localhost:30002/registry:2.7.1
+          env:
+            - name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY
+              value: /data
+            
+            - name: REGISTRY_AUTH
+              value: htpasswd
+            - name: REGISTRY_AUTH_HTPASSWD_REALM
+              value: Registry Realm
+            - name: REGISTRY_AUTH_HTPASSWD_PATH
+              value: /auth/registry.password
+
+            - name: REGISTRY_HTTP_ADDR
+              value: 0.0.0.0:443
+            - name: REGISTRY_HTTP_TLS_CERTIFICATE
+              value: /cert/certificate.crt
+            - name: REGISTRY_HTTP_TLS_KEY
+              value: /cert/certificate.key
+          ports:
+            - containerPort: 5000
+              name: access
+              protocol: TCP
+
+          volumeMounts:
+            - name: registry-data
+              mountPath: /data
+            - name: registry-auth
+              mountPath: /auth
+            - name: registry-cert
+              mountPath: /cert
+      volumes:
+        - name: registry-data
+          persistentVolumeClaim:
+            claimName: registry-data-pvc
+
+        - name: registry-auth
+          persistentVolumeClaim:
+            claimName: registry-auth-pvc
+
+        - name: registry-cert
+          persistentVolumeClaim:
+            claimName: registry-cert-pvc
+
+

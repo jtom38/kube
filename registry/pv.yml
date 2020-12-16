@@ -1,0 +1,63 @@
+---
+
+apiVersion: v1
+kind: PersistentVolume
+
+metadata:
+  name: registry-data
+
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: registry-data
+  nfs:
+#    path: /kube/pihole/pihole
+#    server: 192.168.1.85
+    path: /mnt/nfsshare/kube/registry/data
+    server: 192.168.1.222
+ 
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: registry-auth
+
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: registry-auth
+  nfs:
+#    path: /kube/pihole/pihole
+#    server: 192.168.1.85
+    path: /mnt/nfsshare/kube/registry/auth
+    server: 192.168.1.222
+ 
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: registry-cert
+
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: registry-cert
+  nfs:
+#    path: /kube/pihole/pihole
+#    server: 192.168.1.85
+    path: /mnt/nfsshare/kube/registry/cert
+    server: 192.168.1.222
+ 
+

@@ -1,0 +1,44 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: registry-data-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+    #storageClassName: Filesystem
+  storageClassName: registry-data
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: registry-auth-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+    #storageClassName: Filesystem
+  storageClassName: registry-auth
+  resources:
+    requests:
+      storage: 10Gi
+
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: registry-cert-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+    #storageClassName: Filesystem
+  storageClassName: registry-cert
+  resources:
+    requests:
+      storage: 10Gi
+
+

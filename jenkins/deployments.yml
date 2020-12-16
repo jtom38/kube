@@ -1,0 +1,49 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins
+  labels:
+    app: jenkins
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: jenkins
+
+  template:
+    metadata:
+      labels:
+        app: jenkins
+
+    spec:
+      # nodeSelector:
+      #  kubernetes.io/hostname: 'pihole'
+      containers:
+        - name: jenkins
+          #image: jenkins/jenkins:2.263.1-lts
+          image: localhost:30002/jenkins:2.263.1-lts
+          securityContext:
+            runAsUser: 1000
+          ports:
+            #- name: node-communication
+            - containerPort: 50000
+              protocol: TCP
+
+              #- name: ui
+            - containerPort: 8080
+              protocol: TCP
+
+          volumeMounts:
+            - name: jenkins-data
+              mountPath: /var/jenkins_home
+
+      volumes:
+        - name: jenkins-data
+          persistentVolumeClaim:
+            claimName: jenkins-data-pvc
+
+

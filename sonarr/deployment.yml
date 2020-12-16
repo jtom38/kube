@@ -21,18 +21,18 @@ spec:
     
     spec:
       containers:
-        - name: nextcloud
-          image: nextcloud:20.0.2-apache
+        #restartPolicy: Always
+        - name: sonarr
+          image: linuxserver/sonarr:version-3.0.4.1024
           env:
             - name: POSTGRES_DB
               value: nextcloud
             - name: POSTGRES_USER
               value: nextcloud
             - name: POSTGRES_PASSWORD
-              value: nextcloud
+              value: password
             - name: POSTGRES_HOST
-              value: nc-db:5432
-
+              value: nc-db-service
           ports:
             - containerPort: 80
           volumeMounts:
