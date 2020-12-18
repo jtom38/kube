@@ -1,0 +1,47 @@
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: jenkins
+  labels:
+    app: jenkins
+
+spec:
+  selector:
+    app: jenkins
+  
+  type: ClusterIP
+  ports:
+    
+    - name: agent
+      port: 50000
+      protocol: TCP
+   
+    - name: agent-web
+      port: 80
+      targetPort: 8080
+
+    - name: ui
+      port: 8080
+      targetPort: 8080
+      #nodePort: 30003
+      protocol: TCP
+    
+---
+#  This service lets you access the web ui from outside the cluster
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-access
+  
+spec:
+  selector:
+    app: jenkins
+
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30003
+      protocol: TCP

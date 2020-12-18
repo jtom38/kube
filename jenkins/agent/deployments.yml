@@ -1,0 +1,38 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-agent
+  labels:
+    app: jenkins-agent
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: jenkins-agent
+
+  template:
+    metadata:
+      labels:
+        app: jenkins-agent
+
+    spec:
+      containers:
+        - name: jenkins-agent
+          image: jenkins/agent:4.6-1-alpine
+          #image: localhost:30002/jenkins-agent:4.6-1-alpine
+#          securityContext:
+#            runAsUser: 1000
+          env:
+            - name: JENKINS_URL
+              value: http://jenkins-service
+
+            - name: JENKINS_SECRET
+              value: 28013454105d9ccac20278945532bcc541be9038773ef81badc36dccea509dd8
+            - name: JENKINS_AGENT_WORKDIR
+              value: /home/jenkins/agent
+
+

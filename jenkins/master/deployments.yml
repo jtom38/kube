@@ -20,8 +20,7 @@ spec:
         app: jenkins
 
     spec:
-      # nodeSelector:
-      #  kubernetes.io/hostname: 'pihole'
+      serviceAccountName: jenkins
       containers:
         - name: jenkins
           #image: jenkins/jenkins:2.263.1-lts

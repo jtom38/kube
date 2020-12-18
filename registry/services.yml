@@ -1,25 +1,40 @@
 ---
 apiVersion: v1
 kind: Service
-
 metadata:
   name: registry
 
 spec:
   selector:
     app: registry
+
+  type: ClusterIP
+  ports:
+
+    - name: insecure
+      port: 5000
+      protocol: TCP
+
+    - name: secure
+      port: 443
+      protocol: TCP
+
+
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: registry-access
+
+spec:
+  selector:
+    app: registry-access
   
   type: NodePort
-  #externalIPs:
-  # - 192.168.1.221
-  #externalTrafficPolicy: Local
   ports:
-    #- port: 5000
-    #  targetPort: 5000
-    #  nodePort: 30002
-    #  protocol: TCP
     - port: 443
       targetPort: 443
       nodePort: 30002
       protocol: TCP
-    
+
