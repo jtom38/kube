@@ -9,11 +9,10 @@ spec:
   selector:
     app: nc-web 
   
-  type: NodePort
+  type: ClusterIP
   ports:
     - protocol: TCP
       port: 8083
       targetPort: 80
-      nodePort: 30001
 
 
