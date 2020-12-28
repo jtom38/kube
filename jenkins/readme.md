@@ -32,6 +32,7 @@ kubectl logs jenkinsPodName
 
 ### Kubernetes Cloud Config
 
+```yaml
 name: Kubernetes
 Kubernetes URL: https://kubernetes.default:443
 Credentials
@@ -72,5 +73,5 @@ Pod Template:
     Host Path: /var/run/docker.sock
     Mount Path: /var/run/docker.sock
 Save
-
+```
   

@@ -3,18 +3,15 @@ apiVersion: v1
 kind: Service
 
 metadata:
-  name: nc-web
+  name: nc-cache
 
 spec:
   selector:
-    app: nc-web 
- 
+    app: nc-cache
+
   type: ClusterIP
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
-      name: web-access
-
-
-
+      port: 6379
+      targetPort: 6379
+      name: redis-access

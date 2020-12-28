@@ -3,18 +3,15 @@ apiVersion: v1
 kind: Service
 
 metadata:
-  name: nc-db-service
+  name: nc-db
 
 spec:
   selector:
-    app: nc-db 
-  
-  type: NodePort
+    app: nc-db
+
+  type: ClusterIP
   ports:
-    - protocol: TCP
+    - name: postgress-access
       port: 5432
       targetPort: 5432
-      nodePort: 30002
-    
-
 

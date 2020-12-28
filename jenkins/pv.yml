@@ -14,7 +14,12 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: jenkins-data
-  nfs:
+  hostPath:
+    path: /Users/jamestombleson/kube/jenkins/data
+    type: Directory
+
+
+#  nfs:
 #    path: /kube/pihole/pihole
 #    server: 192.168.1.85
     path: /mnt/nfsshare/kube/jenkins/data

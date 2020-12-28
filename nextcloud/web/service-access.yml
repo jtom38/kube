@@ -3,18 +3,17 @@ apiVersion: v1
 kind: Service
 
 metadata:
-  name: nc-web
+  name: nc-web-access
 
 spec:
   selector:
     app: nc-web 
  
-  type: ClusterIP
+  type: NodePort
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
+      nodePort: 30002
       name: web-access
-
-
 

@@ -1,34 +1,19 @@
 ---
-#apiVersion: networking.k8s.io/v1beta1
-#kind: Ingress
-#metadata:
-#  name: nc-web-ingress
-#  namespace: default
-#  annotations:
-#    nginx.ingress.kubernetes.io/rewrite-target: /
-    #spec:
-    #  rules:
-    #- http:
-    #    paths:
-    #      - path: /cloud
-    #        pathType: Prefix
-    #        backend:
-    #          serviceName: nc-web
-    #          servicePort: 80
-
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: nc-web-ingress
+#  namespace: default
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: haproxy
+
 spec:
   rules:
   - host: cloud.home.local
     http:
       paths:
-      - path: /foo
+      - path: /
         backend:
-          serviceName: nc-service
+          serviceName: nc-web
           servicePort: 80
 

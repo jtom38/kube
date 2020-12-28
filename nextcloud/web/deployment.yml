@@ -32,9 +32,13 @@ spec:
             - name: POSTGRES_PASSWORD
               value: password
             - name: POSTGRES_HOST
-              value: nc-db-service
+              value: nc-db
+
+            - name: REDIS_HOST
+              value: nc-cache
           ports:
             - containerPort: 80
+
           volumeMounts:
             - name: nc-web-storage
               #- name: nc-local-web-storage
@@ -46,7 +50,7 @@ spec:
         #    path: /kube/nc/web/
         #    type: DirectoryOrCreate
 
-        - name: nc-web-storage
+       - name: nc-web-storage
           persistentVolumeClaim:
             claimName: nc-web-nfs-pvc
 

@@ -1,0 +1,28 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nc-cache
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: nc-cache
+
+  template:
+    metadata:
+      labels:
+        app: nc-cache
+
+    spec:
+      containers:
+        - name: nc-cache
+          image: redis:6.0.9-alpine
+          #env:
+
+          ports:
+            - containerPort: 6379
+

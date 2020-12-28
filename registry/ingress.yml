@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: registry-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: registry.home.local
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: registry
+          servicePort: 443
+
