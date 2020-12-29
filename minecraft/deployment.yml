@@ -1,0 +1,61 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft-world01
+  labels:
+    app: minecraft-world01
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: minecraft-world01
+
+  template:
+    metadata:
+      labels:
+        app: minecraft-world01
+
+    spec:
+      containers:
+        - name: minecraft
+          #image: jenkins/jenkins:2.263.1-lts
+          image: itzg/minecraft-server:multiarch-latest
+          env:
+            - name: EULA
+              value: "TRUE"
+              #            - name: TYPE
+              #              value: "CURSEFORGE"
+              #            - name: CF_SERVER_MOD
+              #              value: "/modpacks/SkyFactory-4_Server_4.2.2.zip"
+              #            - name: VERSION
+              #              value: "1.12.2"
+#            - name: USE_MODPACK_START_SCRIPT
+#              value: "FALSE"
+            - name: MEMORY
+              value: "3G"
+          resources:
+            limits:
+              memory: "4Gi"
+          ports:
+            - containerPort: 25565
+              protocol: TCP
+
+          volumeMounts:
+            - name: minecraft-world
+              mountPath: /data
+            - name: minecraft-modpacks
+              mountPath: /modpacks
+
+      volumes:
+        - name: minecraft-world
+          persistentVolumeClaim:
+            claimName: minecraft-world01-pvc
+
+        - name: minecraft-modpacks
+          persistentVolumeClaim:
+            claimName: minecraft-modpacks-pvc
+

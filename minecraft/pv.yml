@@ -1,0 +1,39 @@
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: minecraft-world01
+
+spec:
+  capacity:
+    storage: 10Gi
+
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: minecraft-world01
+  nfs:
+    path: /mnt/nfsshare/kube/minecraft/world01
+    server: 192.168.1.222
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: minecraft-modpacks
+
+spec:
+  capacity:
+    storage: 10Gi
+
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: minecraft-modpacks
+  nfs:
+    path: /mnt/nfsshare/kube/minecraft/modpacks
+    server: 192.168.1.222
+

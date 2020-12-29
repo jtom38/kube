@@ -1,0 +1,20 @@
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: minecraft-world01
+  labels:
+    app: minecraft-world01
+
+spec:
+  selector:
+    app: minecraft-world01
+
+  type: NodePort
+  ports:
+    - name: access
+      port: 25565
+      nodePort: 31333
+      protocol: TCP

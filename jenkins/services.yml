@@ -39,9 +39,13 @@ spec:
   selector:
     app: jenkins
 
-  type: NodePort
+    #type: NodePort
+  type: LoadBalancer
   ports:
-    - port: 8080
+    - port: 80
       targetPort: 8080
-      nodePort: 30003
+      #nodePort: 30003
       protocol: TCP
+
+
+

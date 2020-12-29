@@ -51,6 +51,6 @@ spec:
         #    type: DirectoryOrCreate
 
        - name: nc-web-storage
-          persistentVolumeClaim:
+         persistentVolumeClaim:
             claimName: nc-web-nfs-pvc
 

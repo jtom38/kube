@@ -4,16 +4,16 @@ kind: Ingress
 metadata:
   name: nc-web-ingress
 #  namespace: default
-  annotations:
-    kubernetes.io/ingress.class: haproxy
+#  annotations:
+#    kubernetes.io/ingress.class: haproxy
 
 spec:
   rules:
-  - host: cloud.home.local
+  - host: nextcloud.home.local
     http:
       paths:
       - path: /
         backend:
-          serviceName: nc-web
+          serviceName: nc-web-access
           servicePort: 80
 

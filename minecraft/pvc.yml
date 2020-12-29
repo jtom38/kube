@@ -1,0 +1,29 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: minecraft-world01-pvc
+
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: minecraft-world01
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: minecraft-modpacks-pvc
+
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: minecraft-modpacks
+  resources:
+    requests:
+      storage: 10Gi
+
+
