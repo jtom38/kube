@@ -14,10 +14,9 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: registry-data
-  nfs:
-#    path: /kube/pihole/pihole
-#    server: 192.168.1.85
-    path: /mnt/nfsshare/kube/registry/data
+  nfs: 
+    #path: /mnt/nfsshare/kube/registry/data
+    path: /mnt/data/kube/registry/data
     server: 192.168.1.222
  
 ---
@@ -37,7 +36,7 @@ spec:
   nfs:
 #    path: /kube/pihole/pihole
 #    server: 192.168.1.85
-    path: /mnt/nfsshare/kube/registry/auth
+    path: /mnt/data/kube/registry/auth
     server: 192.168.1.222
  
 ---
@@ -57,7 +56,7 @@ spec:
   nfs:
 #    path: /kube/pihole/pihole
 #    server: 192.168.1.85
-    path: /mnt/nfsshare/kube/registry/cert
+    path: /mnt/data/kube/registry/cert
     server: 192.168.1.222
  
 

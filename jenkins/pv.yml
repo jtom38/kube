@@ -23,7 +23,8 @@ spec:
   nfs:
 #    path: /kube/pihole/pihole
 #    server: 192.168.1.85
-    path: /mnt/nfsshare/kube/jenkins/data
+#path: /mnt/nfsshare/kube/jenkins/data
+#server: 192.168.1.222
+    path: /mnt/data/kube/jenkins/data
     server: 192.168.1.222
- 
 

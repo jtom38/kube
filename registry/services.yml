@@ -29,7 +29,7 @@ metadata:
 
 spec:
   selector:
-    app: registry-access
+    app: registry
   
   type: NodePort
   ports:

@@ -24,8 +24,7 @@ spec:
       #  kubernetes.io/hostname: 'pihole'
       containers:
         - name: registry
-         image: registry:2.7.1
-#          image: localhost:30002/registry:2.7.1
+          image: registry:2.7.1
           env:
             - name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY
               value: /data
@@ -48,24 +47,27 @@ spec:
               name: access
               protocol: TCP
 
-#          volumeMounts:
-#            - name: registry-data
-#              mountPath: /data
-#            - name: registry-auth
-#              mountPath: /auth
-#            - name: registry-cert
-#              mountPath: /cert
-#      volumes:
-#        - name: registry-data
-#          persistentVolumeClaim:
-#            claimName: registry-data-pvc
-#
-#        - name: registry-auth
-#          persistentVolumeClaim:
-#            claimName: registry-auth-pvc
-#
-#        - name: registry-cert
-#          persistentVolumeClaim:
-#            claimName: registry-cert-pvc
+            - containerPort: 443
+              name: https-access
+              protocol: TCP
 
+          volumeMounts:
+            - name: registry-data
+              mountPath: /data
+            - name: registry-auth
+              mountPath: /auth
+            - name: registry-cert
+              mountPath: /cert
+      volumes:
+        - name: registry-data
+          persistentVolumeClaim:
+            claimName: registry-data-pvc
+
+        - name: registry-auth
+          persistentVolumeClaim:
+            claimName: registry-auth-pvc
+
+        - name: registry-cert
+          persistentVolumeClaim:
+            claimName: registry-cert-pvc
 

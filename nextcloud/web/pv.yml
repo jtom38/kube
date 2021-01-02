@@ -23,9 +23,8 @@ spec:
   #  mountOptions:
   #  - hard
   #  - nfsvers=4.1
-  nfs:
-#    path: /kube/nextcloud/web
-#    server: 192.168.1.85
-    path: /mnt/nfsshare/kube/nextcloud/web
+  nfs: 
+    #path: /mnt/nfsshare/kube/nextcloud/web
+    path: /mnt/data/kube/nextcloud/web
     server: 192.168.1.222
  

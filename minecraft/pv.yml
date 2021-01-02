@@ -15,7 +15,8 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: minecraft-world01
   nfs:
-    path: /mnt/nfsshare/kube/minecraft/world01
+    #path: /mnt/nfsshare/kube/minecraft/world01
+    path: /mnt/data/kube/minecraft/world01
     server: 192.168.1.222
 
 ---
@@ -34,6 +35,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: minecraft-modpacks
   nfs:
-    path: /mnt/nfsshare/kube/minecraft/modpacks
+    #path: /mnt/nfsshare/kube/minecraft/modpacks
+    path: /mnt/data/kube/minecraft/modpacks
     server: 192.168.1.222
 

@@ -43,7 +43,7 @@ spec:
         #  hostPath:
         #    path: /kube/nc/db
         #    type: DirectoryOrCreate
-       - name: nc-db-storage
+        - name: nc-db-storage
           persistentVolumeClaim:
             claimName: nc-db-nfs-pvc
 
