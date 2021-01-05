@@ -1,19 +1,26 @@
 #!/bin/bash
 set -e
 
+## Example
+# ./pushImage.sh remoteImageName:tag localImageName:tag
+# ./pushImage.sh nextcloud:20.0.4-apache nextcloud:20.0.4
+
+
 REMOTEIMAGE=$1
 LOCALNAME=$2
 LOCALREG='localhost:30002'
 
-echo "Pulling ${REMOTEIMAGE}"
+echo "`r`n Pulling ${REMOTEIMAGE}"
 docker pull ${REMOTEIMAGE}
 
-echo "Tagging ${LOCALREG}/${LOCALNAME}"
+echo "`r`n Tagging ${LOCALREG}/${LOCALNAME}"
 docker tag ${REMOTEIMAGE} ${LOCALREG}/${LOCALNAME}
 
-echo "Pushing to ${LOCALREG}"
+echo "`r`nPushing to ${LOCALREG}"
 docker push ${LOCALREG}/${LOCALNAME}
 
-echo "Removing tag ${LOCALREG}/${LOCALNAME}"
+echo "`r`n Removing tag ${LOCALREG}/${LOCALNAME}"
 docker image remove ${LOCALREG}/${LOCALNAME}
-#docker image remove ${REMOTEIMAGE}
+
+echo "`r`n Removing remote image"
+docker image remove ${REMOTEIMAGE}

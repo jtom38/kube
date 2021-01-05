@@ -23,8 +23,8 @@ spec:
       serviceAccountName: jenkins
       containers:
         - name: jenkins
-          #image: jenkins/jenkins:2.263.1-lts
-          image: localhost:30002/jenkins:2.263.1-lts
+          image: jenkins/jenkins:2.263.1-lts
+          #image: localhost:30002/jenkins:2.263.1-lts
           securityContext:
             runAsUser: 1000
           ports:
@@ -38,11 +38,16 @@ spec:
 
           volumeMounts:
             - name: jenkins-data
-              mountPath: /var/jenkins_home
+              mountPath: /var/jenkins_home/
+            - name: jenkins-jobs
+              mountPath: /var/jenkins_home/jobs
 
       volumes:
         - name: jenkins-data
           persistentVolumeClaim:
             claimName: jenkins-data-pvc
+        - name: jenkins-jobs
+          persistentVolumeClaim:
+            claimName: jenkins-jobs-pvc
 
 

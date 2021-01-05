@@ -21,10 +21,31 @@ spec:
   #  type: Directory
 
   nfs:
-#    path: /kube/pihole/pihole
-#    server: 192.168.1.85
-#path: /mnt/nfsshare/kube/jenkins/data
-#server: 192.168.1.222
     path: /mnt/data/kube/jenkins/data
+    server: 192.168.1.222
+
+---
+apiVersion: v1
+kind: PersistentVolume
+
+metadata:
+  name: jenkins-jobs
+
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: jenkins-jobs
+
+  # This is used for local development
+  #hostPath:
+  #  path: /Users/jamestombleson/kube/jenkins/data
+  #  type: Directory
+
+  nfs:
+    path: /mnt/data/kube/jenkins/jobs
     server: 192.168.1.222
 

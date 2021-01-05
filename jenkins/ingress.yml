@@ -6,11 +6,11 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    #- host: jenkins2.home.local
-    - http:
+    - host: jenkins2.home.local
+      http:
         paths:
         - path: /jenkins2
-          pathType: prefix
+          #pathType: prefix
           backend:
             serviceName: jenkins-access
             servicePort: 80

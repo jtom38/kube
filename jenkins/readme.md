@@ -7,8 +7,12 @@ For the user to access the volume correctly you will need to adjust permissions.
 This is the command I ran against my NFS share, its a bit extra but, worked.
 
 ```shell
+# Notice:
+# This will give everyone (user, group, and other) read write to the directory.
 sudo chmod -R ugo+rw /mnt/kubefs/jenkins/data
 ```
+
+When reviewing the logs if you see that Jenkins is unable to touch a file, update the permissions on the folder.
 
 ## Unlocking Jenkins
 
