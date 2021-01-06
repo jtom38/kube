@@ -24,7 +24,7 @@ spec:
       #  kubernetes.io/hostname: 'pihole'
       containers:
         - name: pihole
-          image: pihole/pihole:v5.2.1
+          image: pihole/pihole:v5.2.2
           env:
             - name: WEBPASSWORD
               value: pihole
