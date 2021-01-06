@@ -52,5 +52,5 @@ spec:
 
        - name: nc-web-storage
          persistentVolumeClaim:
-            claimName: nc-web-nfs-pvc
+            claimName: nc-web-pvc
 

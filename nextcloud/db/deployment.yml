@@ -45,5 +45,5 @@ spec:
         #    type: DirectoryOrCreate
         - name: nc-db-storage
           persistentVolumeClaim:
-            claimName: nc-db-nfs-pvc
+            claimName: nc-db-pvc
 

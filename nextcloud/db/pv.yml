@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolume
 
 metadata:
-  name: nc-db-nfs-pv
+  name: nc-db-pv
 
 spec:
   capacity:
@@ -12,12 +12,8 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: nc-db-nfs
-  #  mountOptions:
-  #  - hard
-  #  - nfsvers=4.1
+  storageClassName: nc-db
   nfs:
-    #path: /mnt/nfsshare/kube/nextcloud/db
     path: /mnt/data/kube/nextcloud/db
     server: 192.168.1.222
    
@@ -25,7 +21,7 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: nc-db-nfs-pvc
+  name: nc-db-pvc
 spec:
   accessModes:
     - ReadWriteMany

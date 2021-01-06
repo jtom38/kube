@@ -2,18 +2,12 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: nc-web-nfs-pvc
+  name: nc-web-pvc
 
 spec:
-  #selector:
-  #  matchLabels:
-  #    name: nc-web-nfs-pvv
   accessModes:
     - ReadWriteMany
-
-  #volumeMode: Filesystem
-  storageClassName: nc-web-nfs
-  #storageClassName: nfs
+  storageClassName: nc-web
   resources:
     requests:
       storage: 10Gi
