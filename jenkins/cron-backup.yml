@@ -1,0 +1,66 @@
+---
+# Notes:
+# To use the secret you will need to make a new secret and store your value in it
+# >kubectl create secret generic SecretNameHere
+# You will now need to take your secret that you want to store and convert it to base64
+# > echo "yourSecret" | base64
+# Copy the output to your clipboard
+# > kubectl edit secret SecretKeyName
+# Append the following to the bottom of the file.
+# data:
+#   url: base64CodeHere
+#
+# Save it
+
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: cron-jenkins-jobs-backup
+spec:
+  schedule: "10 1 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup
+            image: jtom38/cron-backup:0.0.6
+            imagePullPolicy: IfNotPresent
+            args:
+            - python3
+            - /scripts/backup.py
+            env:
+              - name: BACKUP_JOB
+                value: 'jenkins-jobs'
+              - name: BACKUP_SOURCE
+                value: '/var/jenkins_home/jobs'
+              - name: BACKUP_DEST
+                value: '/backup'
+              - name: BACKUP_USERNAME
+                value: 'Kubernetes'
+              - name: BACKUP_MAXAGEDAYS
+                value: '30'
+              - name: BACKUP_DEBUG
+                value: 'true'
+              - name: BACKUP_WEBHOOK
+                valueFrom:
+                  secretKeyRef:
+                    name: discord-alerts-url
+                    key: url
+            volumeMounts:
+              - name: jenkins-data
+                mountPath: /var/jenkins_home
+              - name: jenkins-backup
+                mountPath: /backup
+          restartPolicy: OnFailure
+
+          volumes:
+            - name: jenkins-data
+              persistentVolumeClaim:
+                claimName: jenkins-data-pvc
+
+            - name: jenkins-backup
+              persistentVolumeClaim:
+                claimName: jenkins-backup-pvc
+
+

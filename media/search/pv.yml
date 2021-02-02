@@ -1,0 +1,39 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+
+metadata:
+  name: media-search-config
+
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: media-search-config
+  nfs:
+    path: /mnt/data/kube/media/search/config
+    server: 192.168.1.222
+
+---
+apiVersion: v1
+kind: PersistentVolume
+
+metadata:
+  name: media-search-download
+
+spec:
+  capacity:
+    storage: 100Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: media-download
+  nfs:
+    path: /mnt/data/kube/media/download
+    server: 192.168.1.222
+
+

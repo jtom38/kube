@@ -1,0 +1,27 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: media-search-config-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: media-search-config
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: media-search-download-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: media-download
+  resources:
+    requests:
+      storage: 100Gi
+
+

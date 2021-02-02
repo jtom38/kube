@@ -1,0 +1,98 @@
+---
+# Notes:
+# To use the secret you will need to make a new secret and store your value in it
+# >kubectl create secret generic SecretNameHere
+# You will now need to take your secret that you want to store and convert it to base64
+# > echo "yourSecret" | base64
+# Copy the output to your clipboard
+# > kubectl edit secret SecretKeyName
+# Append the following to the bottom of the file.
+# data:
+#   url: base64CodeHere
+#
+# Save it
+
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: cron-pihole-etc-backup
+spec:
+  schedule: "1 1 * * 1"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup
+            image: jtom38/cron-backup:0.0.6
+            imagePullPolicy: IfNotPresent
+            args:
+            - python3
+            - /scripts/backup.py
+            env:
+              - name: BACKUP_JOB
+                value: 'pihole-etc'
+              - name: BACKUP_SOURCE
+                value: '/etc/pihole'
+              - name: BACKUP_DEST
+                value: '/backup'
+              - name: BACKUP_USERNAME
+                value: 'Kubernetes'
+              - name: BACKUP_MAXAGEDAYS
+                value: '30'
+              - name: BACKUP_DEBUG
+                value: 'true'
+              - name: BACKUP_WEBHOOK
+                valueFrom:
+                  secretKeyRef:
+                    name: discord-alerts-url
+                    key: url
+            volumeMounts:
+              - name: pihole-etc
+                mountPath: /etc/pihole
+              - name: pihole-backup
+                mountPath: /backup
+          restartPolicy: OnFailure
+
+          volumes:
+            - name: pihole-etc
+              persistentVolumeClaim:
+                claimName: pihole-etc-pihole-pvc
+
+            - name: pihole-backup
+              persistentVolumeClaim:
+                claimName: pihole-etc-backup-pvc 
+
+---
+apiVersion: v1
+kind: PersistentVolume
+
+metadata:
+  name: pihole-etc-backup
+
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: pihole-etc-backup
+  nfs:
+    path: /kube/backup/pihole-etc
+    server: 192.168.1.85
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pihole-etc-backup-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: pihole-etc-backup
+  resources:
+    requests:
+      storage: 10Gi
+
+

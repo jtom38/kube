@@ -3,19 +3,19 @@ apiVersion: v1
 kind: Service
 
 metadata:
-  name: media-back-get
+  name: media-search
   labels:
-    app: media-back-get
+    app: media-search
 
 spec:
   selector:
-    app: media-back-get
+    app: media-search
   
   type: ClusterIP
   ports:
     - name: ui
-      port: 6789
-      targetPort: 6789
+      port: 5076
+      targetPort: 5076
       #nodePort: 30003
       protocol: TCP
     
@@ -24,17 +24,18 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: media-back-get-access
+  name: media-search-access
   
 spec:
   selector:
-    app: jenkins
+    app: media-search
 
     #type: NodePort
   type: LoadBalancer
+  loadBalancerIP: 192.168.1.251
   ports:
     - port: 80
-      targetPort: 6789
+      targetPort: 5076
       #nodePort: 30003
       protocol: TCP
 

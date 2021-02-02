@@ -21,6 +21,6 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: nc-web 
   nfs: 
-    path: /mnt/data/kube/nextcloud/web
+    path: /mnt/data/nextcloud/web
     server: 192.168.1.222
  

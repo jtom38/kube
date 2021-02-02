@@ -23,7 +23,7 @@ spec:
       containers:
         #restartPolicy: Always
         - name: nextcloud
-          image: nextcloud:20.0.2-apache
+          image: nextcloud:20.0.5-apache
           env:
             - name: POSTGRES_DB
               value: nextcloud
@@ -32,10 +32,10 @@ spec:
             - name: POSTGRES_PASSWORD
               value: password
             - name: POSTGRES_HOST
-              value: nc-db
+              value: nc-db.default
 
             - name: REDIS_HOST
-              value: nc-cache
+              value: nc-cache.default
           ports:
             - containerPort: 80
 

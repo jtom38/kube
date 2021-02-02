@@ -1,0 +1,47 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: media-get
+  labels:
+    app: media-get
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: media-get
+
+  template:
+    metadata:
+      labels:
+        app: media-get
+
+    spec:
+      containers:
+        - name: media-get
+          image: linuxserver/nzbget:v21.0-ls48
+          #image: localhost:30002/jenkins:2.263.1-lts
+          ports:
+              #- name: ui
+            - containerPort: 6789
+              protocol: TCP
+
+          volumeMounts:
+            - name: media-get-config
+              mountPath: /config
+            - name: media-download
+              mountPath: /downloads
+
+      volumes:
+        - name: media-get-config
+          persistentVolumeClaim:
+            claimName: media-get-config-pvc
+        - name: media-download
+          persistentVolumeClaim:
+            claimName: media-get-download-pvc
+
+
+

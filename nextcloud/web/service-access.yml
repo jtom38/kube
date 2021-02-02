@@ -10,6 +10,7 @@ spec:
     app: nc-web 
  
   type: LoadBalancer
+  loadBalancerIP: 192.168.1.249
   ports:
     - protocol: TCP
       port: 80

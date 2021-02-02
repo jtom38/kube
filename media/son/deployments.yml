@@ -1,0 +1,50 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: media-son
+  labels:
+    app: media-son
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: media-son
+
+  template:
+    metadata:
+      labels:
+        app: media-son
+
+    spec:
+      containers:
+        - name: media-son
+          image: linuxserver/sonarr:version-2.0.0.5344
+          #image: localhost:30002/jenkins:2.263.1-lts
+          ports:
+              #- name: ui
+            - containerPort: 8989
+              protocol: TCP
+
+          volumeMounts:
+            - name: media-son-config
+              mountPath: /config
+
+            - name: media-download
+              mountPath: /downloads
+            - name: media-content
+              mountPath: /tv
+      volumes:
+        - name: media-son-config
+          persistentVolumeClaim:
+            claimName: media-son-config-pvc
+        - name: media-download
+          persistentVolumeClaim:
+            claimName: media-son-download-pvc
+        - name: media-content
+          persistentVolumeClaim:
+            claimName: media-son-content-pvc
+

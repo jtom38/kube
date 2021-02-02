@@ -39,15 +39,15 @@ spec:
           volumeMounts:
             - name: jenkins-data
               mountPath: /var/jenkins_home/
-            - name: jenkins-jobs
-              mountPath: /var/jenkins_home/jobs
+              #- name: jenkins-jobs
+              #mountPath: /var/jenkins_home/jobs
 
       volumes:
         - name: jenkins-data
           persistentVolumeClaim:
             claimName: jenkins-data-pvc
-        - name: jenkins-jobs
-          persistentVolumeClaim:
-            claimName: jenkins-jobs-pvc
+            #- name: jenkins-jobs
+            #persistentVolumeClaim:
+            #claimName: jenkins-jobs-pvc
 
 

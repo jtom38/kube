@@ -1,0 +1,45 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: media-search
+  labels:
+    app: media-search
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: media-search
+
+  template:
+    metadata:
+      labels:
+        app: media-search
+
+    spec:
+      containers:
+        - name: media-search
+          image: linuxserver/nzbhydra2:version-v3.9.0
+          #image: localhost:30002/jenkins:2.263.1-lts
+          ports:
+              #- name: ui
+            - containerPort: 5076
+              protocol: TCP
+
+          volumeMounts:
+            - name: media-search-config
+              mountPath: /config
+
+            - name: media-download
+              mountPath: /downloads
+      volumes:
+        - name: media-search-config
+          persistentVolumeClaim:
+            claimName: media-search-config-pvc
+        - name: media-download
+          persistentVolumeClaim:
+            claimName: media-search-download-pvc
+

@@ -16,7 +16,8 @@ spec:
   storageClassName: registry-data
   nfs: 
     #path: /mnt/nfsshare/kube/registry/data
-    path: /mnt/data/kube/registry/data
+    #server: 192.168.1.85
+    path: /mnt/data/registry/data
     server: 192.168.1.222
  
 ---
@@ -34,9 +35,9 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: registry-auth
   nfs:
-#    path: /kube/pihole/pihole
-#    server: 192.168.1.85
-    path: /mnt/data/kube/registry/auth
+    #path: /kube/registry/auth
+    #server: 192.168.1.85
+    path: /mnt/data/registry/auth
     server: 192.168.1.222
  
 ---
@@ -54,9 +55,9 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: registry-cert
   nfs:
-#    path: /kube/pihole/pihole
-#    server: 192.168.1.85
-    path: /mnt/data/kube/registry/cert
+    #path: /kube/registry/cert
+    #server: 192.168.1.85
+    path: /mnt/data/registry/cert
     server: 192.168.1.222
  
 
