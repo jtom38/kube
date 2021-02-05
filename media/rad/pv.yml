@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: media-son-config
+  name: media-rad-config
 spec:
   capacity:
     storage: 10Gi
@@ -10,14 +10,14 @@ spec:
   accessModes:
   - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: media-son-config
+  storageClassName: media-rad-config
 
   #nfs:
   #  path: /mnt/data/media/son/config
   #  server: 192.168.1.222
 
   local:
-    path: /kube/son/config
+    path: /kube/rad/config
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -32,7 +32,7 @@ apiVersion: v1
 kind: PersistentVolume
 
 metadata:
-  name: media-son-download
+  name: media-rad-download
 
 spec:
   capacity:
@@ -41,7 +41,7 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: media-download
+  storageClassName: media-rad-download
   nfs:
     path: /mnt/data/media/download
     server: 192.168.1.222
@@ -51,7 +51,7 @@ apiVersion: v1
 kind: PersistentVolume
 
 metadata:
-  name: media-son-content
+  name: media-rad-content
 
 spec:
   capacity:
@@ -60,7 +60,7 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: media-plex-content
+  storageClassName: media-rad-plex-content
   nfs:
     path: /Plex/
     server: 192.168.1.85

@@ -1,0 +1,15 @@
+NAME                                        READY   STATUS      RESTARTS   AGE
+cron-jenkins-jobs-backup-1612228200-ps68g   0/1     Completed   0          2d23h
+cron-jenkins-jobs-backup-1612314600-7bzlm   0/1     Completed   0          47h
+cron-jenkins-jobs-backup-1612401000-6t2zb   0/1     Completed   0          23h
+jenkins-5c7cdbc97f-2v5kp                    1/1     Running     1          3d
+media-get-794568cb5b-9csgp                  1/1     Running     0          7h40m
+media-rad-7444b6bccb-8576f                  1/1     Running     0          6h47m
+media-search-6cbf5cbb84-799jg               1/1     Running     0          8h
+media-son-6ff48b5b76-psztr                  1/1     Running     0          8h
+nc-cache-7954bc949-x5f77                    1/1     Running     1          3d
+nc-db-7ff8dbf8dc-zgwxs                      1/1     Running     0          29h
+nc-web-785b698448-67nv6                     1/1     Running     0          29h
+pihole-5d45985d48-n28bc                     1/1     Running     1          3d
+registry-754cdbb4fb-lcg56                   1/1     Running     0          4m38s
+registry-754cdbb4fb-vqzt9                   1/1     Running     1          3d

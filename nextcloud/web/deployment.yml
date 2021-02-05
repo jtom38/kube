@@ -23,7 +23,8 @@ spec:
       containers:
         #restartPolicy: Always
         - name: nextcloud
-          image: nextcloud:20.0.5-apache
+          #image: nextcloud:20.0.5-apache
+          image: linuxserver/nextcloud:version-20.0.7
           env:
             - name: POSTGRES_DB
               value: nextcloud
@@ -37,12 +38,14 @@ spec:
             - name: REDIS_HOST
               value: nc-cache.default
           ports:
-            - containerPort: 80
+            - containerPort: 443
 
           volumeMounts:
-            - name: nc-web-storage
+            - name: nc-web-data
               #- name: nc-local-web-storage
-              mountPath: /var/www/html
+              mountPath: /data
+            - name: nc-web-config
+              mountPath: /config
         
       volumes:
         #- name: nc-local-web-storage
@@ -50,7 +53,10 @@ spec:
         #    path: /kube/nc/web/
         #    type: DirectoryOrCreate
 
-       - name: nc-web-storage
-         persistentVolumeClaim:
-            claimName: nc-web-pvc
+        - name: nc-web-data
+          persistentVolumeClaim:
+            claimName: nc-web-data-pvc
+        - name: nc-web-config 
+          persistentVolumeClaim:
+            claimName: nc-web-config-pvc
 

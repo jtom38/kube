@@ -16,7 +16,7 @@ spec:
   storageClassName: media-get-config
 
   nfs:
-    path: /mnt/data/kube/media/get/config
+    path: /mnt/data/media/get/config
     server: 192.168.1.222
 
 ---
@@ -37,6 +37,6 @@ spec:
   storageClassName: media-download
 
   nfs:
-    path: /mnt/data/kube/media/download
+    path: /mnt/data/media/download
     server: 192.168.1.222
 

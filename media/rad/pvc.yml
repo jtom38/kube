@@ -2,11 +2,11 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: media-son-config-pvc
+  name: media-rad-config-pvc
 spec:
   accessModes:
   - ReadWriteMany
-  storageClassName: media-son-config
+  storageClassName: media-rad-config
   resources:
     requests:
       storage: 10Gi
@@ -15,11 +15,11 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: media-son-download-pvc
+  name: media-rad-download-pvc
 spec:
   accessModes:
   - ReadWriteMany
-  storageClassName: media-download
+  storageClassName: media-rad-download
   resources:
     requests:
       storage: 100Gi
@@ -28,11 +28,11 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: media-son-content-pvc
+  name: media-rad-content-pvc
 spec:
   accessModes:
   - ReadWriteMany
-  storageClassName: media-plex-content
+  storageClassName: media-rad-plex-content
   resources:
     requests:
       storage: 10Ti

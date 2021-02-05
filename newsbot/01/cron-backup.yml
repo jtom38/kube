@@ -15,9 +15,9 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: cron-jenkins-jobs-backup
+  name: cron-newsbot01-backup
 spec:
-  schedule: "10 1 * * 1"
+  schedule: "10 1 * * 2"
   jobTemplate:
     spec:
       template:
@@ -31,9 +31,9 @@ spec:
             - /scripts/backup.py
             env:
               - name: BACKUP_JOB
-                value: 'jenkins-jobs'
+                value: 'newsbot01-config'
               - name: BACKUP_SOURCE
-                value: '/var/jenkins_home/jobs'
+                value: '/config'
               - name: BACKUP_DEST
                 value: '/backup'
               - name: BACKUP_USERNAME
@@ -48,19 +48,51 @@ spec:
                     name: discord-alerts-url
                     key: url
             volumeMounts:
-              - name: jenkins-data
-                mountPath: /var/jenkins_home
-              - name: jenkins-backup
+              - name: data
+                mountPath: /config
+              - name: backup
                 mountPath: /backup
           restartPolicy: OnFailure
 
           volumes:
-            - name: jenkins-data
+            - name: data
               persistentVolumeClaim:
-                claimName: jenkins-data-pvc
+                claimName: newsbot01-config-pvc 
 
-            - name: jenkins-backup
+            - name: backup
               persistentVolumeClaim:
-                claimName: jenkins-backup-pvc
+                claimName: newsbot01-config-backup-pvc
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: newsbot01-config-backup-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: newsbot01-config-backup
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+apiVersion: v1
+kind: PersistentVolume
+
+metadata:
+  name: newsbot01-config-backup
+
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: newsbot01-config-backup
+  nfs:
+    path: /kube/backup/newsbot01-config
+    server: 192.168.1.85
 
 

@@ -1,0 +1,35 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: newsbot01
+  labels:
+    app: newsbot01
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: newsbot01
+
+  template:
+    metadata:
+      labels:
+        app: newsbot01
+
+    spec:
+      containers:
+        - name: newsbot01
+          image: jtom38/newsbot:0.6.0
+          ports:
+          volumeMounts:
+            - name: newsbot01-config
+              mountPath: /config
+
+      volumes:
+        - name: newsbot01-config
+          persistentVolumeClaim:
+            claimName: newsbot01-config-pvc
+

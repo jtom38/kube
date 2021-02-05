@@ -1,0 +1,48 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: media-rad
+  labels:
+    app: media-rad
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: media-rad
+
+  template:
+    metadata:
+      labels:
+        app: media-rad
+
+    spec:
+      containers:
+        - name: media-rad
+          image: linuxserver/radarr:version-3.0.1.4259
+          ports:
+            - containerPort: 7878
+              protocol: TCP
+
+          volumeMounts:
+            - name: media-rad-config
+              mountPath: /config
+
+            - name: media-download
+              mountPath: /downloads
+            - name: media-content
+              mountPath: /tv
+      volumes:
+        - name: media-rad-config
+          persistentVolumeClaim:
+            claimName: media-rad-config-pvc
+        - name: media-download
+          persistentVolumeClaim:
+            claimName: media-rad-download-pvc
+        - name: media-content
+          persistentVolumeClaim:
+            claimName: media-rad-content-pvc
+

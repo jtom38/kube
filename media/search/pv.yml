@@ -13,9 +13,20 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: media-search-config
-  nfs:
-    path: /mnt/data/kube/media/search/config
-    server: 192.168.1.222
+  
+  #nfs:
+  #  path: /mnt/data/kube/media/search/config
+  #  server: 192.168.1.222
+  local:
+    path: /kube/search/config
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - k8sn03
 
 ---
 apiVersion: v1
@@ -33,7 +44,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: media-download
   nfs:
-    path: /mnt/data/kube/media/download
+    path: /mnt/data/media/download
     server: 192.168.1.222
 
 

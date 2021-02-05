@@ -1,15 +1,15 @@
 ---
-kind: persistentvolumeclaim
-apiversion: v1
+kind: PersistentVolumeClaim
+apiVersion: v1
 metadata:
   name: media-get-config-pvc
 spec:
-  accessmodes:
-  - readwritemany
-  storageclassname: media-get-config
+  accessModes:
+  - ReadWriteMany
+  storageClassName: media-get-config
   resources:
     requests:
-      storage: 10gi
+      storage: 10Gi
 
 ---
 kind: PersistentVolumeClaim

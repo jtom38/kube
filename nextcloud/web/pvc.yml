@@ -2,12 +2,26 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: nc-web-pvc
+  name: nc-web-data-pvc
 
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: nc-web
+  storageClassName: nc-web-data
   resources:
     requests:
       storage: 10Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nc-web-config-pvc
+
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nc-web-config
+  resources:
+    requests:
+      storage: 10Gi
+
