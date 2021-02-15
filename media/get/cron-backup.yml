@@ -15,7 +15,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: cron-media-search-config-backup
+  name: cron-media-get-config-backup
 spec:
   schedule: "10 1 * * 2"
   jobTemplate:
@@ -31,7 +31,7 @@ spec:
             - /scripts/backup.py
             env:
               - name: BACKUP_JOB
-                value: 'media-search-config'
+                value: 'media-get-config'
               - name: BACKUP_SOURCE
                 value: '/config'
               - name: BACKUP_DEST
@@ -59,18 +59,18 @@ spec:
           volumes:
             - name: data
               persistentVolumeClaim:
-                claimName: media-search-config-pvc
+                claimName: media-get-config-pvc 
 
             - name: backup
               persistentVolumeClaim:
-                claimName: media-search-config-backup-pvc
+                claimName: media-get-config-backup-pvc
 
 ---
 apiVersion: v1
 kind: PersistentVolume
 
 metadata:
-  name: media-search-config-backup
+  name: media-get-config-backup
 
 spec:
   capacity:
@@ -79,7 +79,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: media-search-config-backup
+  storageClassName: media-get-config-backup
   nfs:
     path: /kube/backup/
     server: 192.168.1.85
@@ -88,11 +88,11 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: media-search-config-backup-pvc
+  name: media-get-config-backup-pvc
 spec:
   accessModes:
   - ReadWriteOnce
-  storageClassName: media-search-config-backup
+  storageClassName: media-get-config-backup
   resources:
     requests:
       storage: 10Gi

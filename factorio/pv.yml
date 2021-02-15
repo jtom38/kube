@@ -1,0 +1,35 @@
+---
+
+apiVersion: v1
+kind: PersistentVolume
+
+metadata:
+  name: factorio-data
+
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: factorio-data
+  nfs:
+    path: /mnt/data/factorio/world01
+    server: 192.168.1.222
+
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: factorio-data-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: factorio-data
+  resources:
+    requests:
+      storage: 10Gi
+
+

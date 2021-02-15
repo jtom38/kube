@@ -24,7 +24,7 @@ spec:
         spec:
           containers:
           - name: backup
-            image: jtom38/cron-backup:0.0.6
+            image: jtom38/cron-backup:0.0.8
             imagePullPolicy: IfNotPresent
             args:
             - python3

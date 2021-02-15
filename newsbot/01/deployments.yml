@@ -23,7 +23,9 @@ spec:
       containers:
         - name: newsbot01
           image: jtom38/newsbot:0.6.0
-          ports:
+          envFrom:
+            - configMapRef:
+              name: newsbot01-config
           volumeMounts:
             - name: newsbot01-config
               mountPath: /config

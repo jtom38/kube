@@ -1,0 +1,15 @@
+# This is a job that runs once, and installs plugins
+---
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: jenkins-job-init-plugins
+
+spec:
+  template:
+    spec:
+      containers:
+        - name: init-plugins
+          image: java
+           

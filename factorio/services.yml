@@ -1,0 +1,38 @@
+---
+#  This service lets you access the web ui from outside the cluster
+apiVersion: v1
+kind: Service
+metadata:
+  name: factorio-access-udp
+  annotations:
+    metallb.universe.tf/allow-shared-ip: pihole-svc
+
+spec:
+  selector:
+    app: factorio 
+  loadBalancerIP: 192.168.1.201
+  type: LoadBalancer
+  ports:
+    - port: 34197
+      targetPort: 34197
+      protocol: UDP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: factorio-access-tcp
+  annotations:
+    metallb.universe.tf/allow-shared-ip: pihole-svc
+ 
+spec:
+  selector:
+    app: factorio
+  loadBalancerIP: 192.168.1.201
+  type: LoadBalancer
+  ports:
+    - port: 27015
+      targetPort: 27015
+      protocol: TCP
+
+
