@@ -27,8 +27,10 @@ spec:
             - configMapRef:
               name: newsbot01-config
           volumeMounts:
-            - name: newsbot01-config
-              mountPath: /config
+            - name: newsbot01-db
+              mountPath: /app/mounts/database
+            - name: newsbot01-logs
+              mountPath: /app/mounts/logs
 
       volumes:
         - name: newsbot01-config
