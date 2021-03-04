@@ -1,0 +1,48 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: valheim-world01
+  labels:
+    app: valheim-world01
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: valheim-world01
+
+  template:
+    metadata:
+      labels:
+        app: valheim-world01
+
+    spec:
+      containers:
+        - name: app
+          image: lloesche/valheim-server
+          envFrom:
+            - configMapRef:
+                name: valheim-world01-config
+          ports:
+            - containerPort: 2456
+              protocol: UDP
+            - containerPort: 2457
+              protocol: UDP
+            - containerPort: 2458
+              protocol: UDP
+          volumeMounts:
+            - name: valheim-data
+              mountPath: /data
+            - name: valheim-config
+              mountPath: /config
+
+      volumes:
+        - name: valheim-data
+          persistentVolumeClaim:
+            claimName: valheim-data-pvc
+        - name: valheim-config
+          persistentVolumeClaim:
+            claimName: valheim-config-pvc

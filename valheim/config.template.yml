@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: valheim-world01-config-template
+  namespace: default
+data:
+  SERVER_NAME: ''
+  #WORLD_NAME: ""
+  SERVER_PASS: ""
