@@ -3,15 +3,15 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: newsbot01-config
+  name: newsbot01-db
 spec:
   capacity:
     storage: 10Gi
   volumeMode: Filesystem
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: newsbot01-config
+  storageClassName: newsbot01-db
 
   local:
     path: /kube/newsbot/01
@@ -23,5 +23,58 @@ spec:
           operator: In
           values:
           - k8sn02
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: newsbot01-db-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: newsbot01-db
+  resources:
+    requests:
+      storage: 10Gi
+
+
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: newsbot01-db
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: newsbot01-db
+
+  local:
+    path: /kube/newsbot/01
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - k8sn02
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: newsbot01-db-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: newsbot01-db
+  resources:
+    requests:
+      storage: 10Gi
 
 
