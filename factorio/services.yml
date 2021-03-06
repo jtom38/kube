@@ -5,8 +5,7 @@ kind: Service
 metadata:
   name: factorio-access-udp
   annotations:
-    metallb.universe.tf/allow-shared-ip: pihole-svc
-
+    metallb.universe.tf/allow-shared-ip: factorio-svc
 spec:
   selector:
     app: factorio 
@@ -23,8 +22,7 @@ kind: Service
 metadata:
   name: factorio-access-tcp
   annotations:
-    metallb.universe.tf/allow-shared-ip: pihole-svc
- 
+    metallb.universe.tf/allow-shared-ip: factorio-svc
 spec:
   selector:
     app: factorio

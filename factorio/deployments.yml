@@ -1,24 +1,19 @@
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: factorio
   labels:
     app: factorio
-
 spec:
   replicas: 1
-
   selector:
     matchLabels:
       app: factorio
-
   template:
     metadata:
       labels:
         app: factorio
-
     spec:
       containers:
         - name: app
