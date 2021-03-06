@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: duckdns-config-template
+  namespace: default
+data:
+  SUBDOMAINS: ""
+  TOKEN: ""

@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: duckdns
+  labels:
+    app: duckdns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: duckdns
+  template:
+    metadata:
+      labels:
+        app: duckdns
+    spec:
+      containers:
+        - name: app
+          image: ghcr.io/linuxserver/duckdns
+          envFrom:
+            - configMapRef:
+                name: duckdns-config
+          resources:
+            limits:
+              memory: "150Mi"
+              cpu: "150m"
