@@ -32,7 +32,6 @@ spec:
 
 
 ---
-
 apiVersion: v1
 kind: PersistentVolume
 
@@ -63,4 +62,32 @@ spec:
     requests:
       storage: 10Gi
 
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: valheim-backup
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: valheim-backup
+  nfs:
+    path: /kube/backup/valheim/world01/
+    server: 192.168.1.85
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: valheim-backup-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: valheim-backup
+  resources:
+    requests:
+      storage: 10Gi
 

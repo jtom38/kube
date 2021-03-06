@@ -35,9 +35,11 @@ spec:
               protocol: UDP
           volumeMounts:
             - name: valheim-data
-              mountPath: /data
+              mountPath: /opt/valheim
             - name: valheim-config
               mountPath: /config
+            - name: backup
+              mountPath: /backup
 
       volumes:
         - name: valheim-data
@@ -46,3 +48,6 @@ spec:
         - name: valheim-config
           persistentVolumeClaim:
             claimName: valheim-config-pvc
+        - name: backup
+          persistentVolumeClaim:
+            claimName: valheim-backup-pvc
