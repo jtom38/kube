@@ -51,7 +51,7 @@ spec:
           resources:
             limits:
               memory: "2Gi"
-              cpu: "500m"
+              cpu: "1500m"
       volumes:
         - name: media-config
           persistentVolumeClaim:
