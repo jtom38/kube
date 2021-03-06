@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: newsbot02-config-template
+  namespace: default
+data:
+  NEWSBOT_REDDIT_SUB_0: "Cringetopia"
+  NEWSBOT_REDDIT_HOOK_0: ""
+  NEWSBOT_REDDIT_SUB_1: "cursedfood"
+  NEWSBOT_REDDIT_HOOK_1: ""

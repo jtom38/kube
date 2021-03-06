@@ -1,0 +1,53 @@
+# This is using a local path because of SQLite
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: newsbot02-db
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: newsbot02-db
+
+  local:
+    path: /kube/newsbot/01/db
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - k8sn02
+
+# This is using a local path because of SQLite
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: newsbot02-logs
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: newsbot02-logs
+
+  local:
+    path: /kube/newsbot/01/logs
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - k8sn02
+
+
