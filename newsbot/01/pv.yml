@@ -14,7 +14,7 @@ spec:
   storageClassName: newsbot01-db
 
   local:
-    path: /kube/newsbot/01
+    path: /kube/newsbot/01/db
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -24,26 +24,12 @@ spec:
           values:
           - k8sn02
 
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: newsbot01-db-pvc
-spec:
-  accessModes:
-  - ReadWriteOnce
-  storageClassName: newsbot01-db
-  resources:
-    requests:
-      storage: 10Gi
-
-
-
+# This is using a local path because of SQLite
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: newsbot01-db
+  name: newsbot01-logs
 spec:
   capacity:
     storage: 10Gi
@@ -51,10 +37,10 @@ spec:
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: newsbot01-db
+  storageClassName: newsbot01-logs
 
   local:
-    path: /kube/newsbot/01
+    path: /kube/newsbot/01/logs
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -63,18 +49,5 @@ spec:
           operator: In
           values:
           - k8sn02
-
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: newsbot01-db-pvc
-spec:
-  accessModes:
-  - ReadWriteOnce
-  storageClassName: newsbot01-db
-  resources:
-    requests:
-      storage: 10Gi
 
 

@@ -57,7 +57,7 @@ spec:
           volumes:
             - name: data
               persistentVolumeClaim:
-                claimName: newsbot02-config-pvc 
+                claimName: newsbot02-db-pvc 
             - name: backup
               persistentVolumeClaim:
                 claimName: newsbot02-db-backup-pvc

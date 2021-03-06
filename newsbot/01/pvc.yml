@@ -1,0 +1,25 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: newsbot01-db-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: newsbot01-db
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: newsbot01-logs-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: newsbot01-logs
+  resources:
+    requests:
+      storage: 10Gi

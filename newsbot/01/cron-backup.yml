@@ -17,14 +17,14 @@ kind: CronJob
 metadata:
   name: cron-newsbot01-backup
 spec:
-  schedule: "10 1 * * 2"
+  schedule: "10 * * * *"
   jobTemplate:
     spec:
       template:
         spec:
           containers:
           - name: backup
-            image: jtom38/cron-backup:0.0.6
+            image: jtom38/cron-backup:0.0.8
             imagePullPolicy: IfNotPresent
             args:
             - python3
@@ -33,7 +33,7 @@ spec:
               - name: BACKUP_JOB
                 value: 'newsbot01-config'
               - name: BACKUP_SOURCE
-                value: '/config'
+                value: '/app/mounts/database'
               - name: BACKUP_DEST
                 value: '/backup'
               - name: BACKUP_USERNAME
@@ -49,29 +49,28 @@ spec:
                     key: url
             volumeMounts:
               - name: data
-                mountPath: /config
+                mountPath: /app/mounts/database
               - name: backup
                 mountPath: /backup
-          restartPolicy: OnFailure
+          restartPolicy: Never
 
           volumes:
             - name: data
               persistentVolumeClaim:
-                claimName: newsbot01-config-pvc 
-
+                claimName: newsbot01-db-pvc 
             - name: backup
               persistentVolumeClaim:
-                claimName: newsbot01-config-backup-pvc
+                claimName: newsbot01-db-backup-pvc
 
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: newsbot01-config-backup-pvc
+  name: newsbot01-db-backup-pvc
 spec:
   accessModes:
   - ReadWriteOnce
-  storageClassName: newsbot01-config-backup
+  storageClassName: newsbot01-db-backup
   resources:
     requests:
       storage: 10Gi
@@ -79,10 +78,8 @@ spec:
 ---
 apiVersion: v1
 kind: PersistentVolume
-
 metadata:
-  name: newsbot01-config-backup
-
+  name: newsbot01-db-backup
 spec:
   capacity:
     storage: 10Gi
@@ -90,9 +87,17 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: newsbot01-config-backup
+  storageClassName: newsbot01-db-backup
   nfs:
-    path: /kube/backup/newsbot01-config
+    path: /kube/backup/
     server: 192.168.1.85
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - k8sn02
 
 
