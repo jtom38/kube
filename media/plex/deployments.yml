@@ -1,0 +1,62 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: media-plex
+  labels:
+    app: media-plex
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: media-plex
+  template:
+    metadata:
+      labels:
+        app: media-plex
+    spec:
+      containers:
+        - name: app
+          image: linuxserver/plex:version-1.21.3.4046-3c1c83ba4
+          ports:
+            - containerPort: 32400
+              protocol: TCP
+            - containerPort: 3005
+              protocol: TCP
+            - containerPort: 8324
+              protocol: TCP
+            - containerPort: 32469
+              protocol: TCP
+            - containerPort: 1900
+              protocol: UDP
+            - containerPort: 5353
+              protocol: UDP
+            - containerPort: 32410
+              protocol: UDP
+            - containerPort: 32412
+              protocol: UDP
+            - containerPort: 32413
+              protocol: UDP
+            - containerPort: 32414
+              protocol: UDP
+          volumeMounts:
+            - name: media-config
+              mountPath: /config
+            - name: media-content
+              mountPath: /nfs
+          envFrom:
+            - configMapRef:
+                name: media-plex-config
+          resources:
+            limits:
+              memory: "2Gi"
+              cpu: "500m"
+      volumes:
+        - name: media-config
+          persistentVolumeClaim:
+            claimName: media-plex-config-pvc
+        - name: media-content
+          persistentVolumeClaim:
+            claimName: media-plex-content-pvc
+

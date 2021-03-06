@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: media-plex-config-template
+  namespace: default
+data:
+  # https://plex.tv/claim
+  PLEX_CLAIM: ""
+  VERSION: "docker"
+

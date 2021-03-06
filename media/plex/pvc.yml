@@ -1,0 +1,27 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: media-plex-config-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: media-plex-config
+  resources:
+    requests:
+      storage: 50Gi
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: media-plex-content-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: media-plex-content
+  resources:
+    requests:
+      storage: 10Ti
+
+
