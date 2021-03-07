@@ -17,7 +17,7 @@ kind: CronJob
 metadata:
   name: cron-newsbot02-backup
 spec:
-  schedule: "10 * * * *"
+  schedule: "10 3 * * *"
   jobTemplate:
     spec:
       template:
@@ -39,8 +39,10 @@ spec:
               - name: BACKUP_USERNAME
                 value: 'Kubernetes'
               - name: BACKUP_MAXAGEDAYS
-                value: '30'
+                value: '15'
               - name: BACKUP_DEBUG
+                value: 'true'
+              - name: BACKUP_GEN_JOB_DIR
                 value: 'true'
               - name: BACKUP_WEBHOOK
                 valueFrom:
