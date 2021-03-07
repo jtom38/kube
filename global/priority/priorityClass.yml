@@ -1,0 +1,29 @@
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: high-priority
+preemptionPolicy: Never
+value: 1000000
+globalDefault: false
+description: "This high priority class will not preempt other pods."
+
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+   name: med-priority
+#preemptionPolicy: Never
+value: 10000
+globalDefault: true
+description: "This medium priority class is the default and will allow preempt other pods."
+
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+   name: low-priority
+#preemptionPolicy: Never
+value: 1000
+globalDefault: false
+description: "This low priority class is the will allow preempt other pods."

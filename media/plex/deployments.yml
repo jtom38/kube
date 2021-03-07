@@ -52,6 +52,7 @@ spec:
             limits:
               memory: "2Gi"
               cpu: "1500m"
+      priorityClassName: high-priority
       volumes:
         - name: media-config
           persistentVolumeClaim:
