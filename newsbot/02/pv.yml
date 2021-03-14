@@ -14,7 +14,7 @@ spec:
   storageClassName: newsbot02-db
 
   local:
-    path: /kube/newsbot/01/db
+    path: /kube/newsbot/02/db
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -40,7 +40,7 @@ spec:
   storageClassName: newsbot02-logs
 
   local:
-    path: /kube/newsbot/01/logs
+    path: /kube/newsbot/02/logs
   nodeAffinity:
     required:
       nodeSelectorTerms:

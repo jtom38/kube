@@ -26,7 +26,7 @@ spec:
                 name: newsbot02-config
           volumeMounts:
             - name: newsbot02-db
-              mountPath: /config
+              mountPath: /app/mounts/database
       volumes:
         - name: newsbot02-db
           persistentVolumeClaim:
