@@ -18,7 +18,8 @@ spec:
     spec:
       containers:
         - name: app
-          image: linuxserver/plex:version-1.21.3.4046-3c1c83ba4
+          #image: linuxserver/plex:version-1.21.3.4046-3c1c83ba4
+          image: linuxserver/plex:version-1.22.1.4228-724c56e62
           ports:
             - containerPort: 32400
               protocol: TCP
@@ -49,6 +50,9 @@ spec:
             - configMapRef:
                 name: media-plex-config
           resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
             limits:
               memory: "2Gi"
               cpu: "1500m"
