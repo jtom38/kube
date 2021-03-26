@@ -23,18 +23,23 @@ spec:
       containers:
         - name: media-search
           image: linuxserver/nzbhydra2:version-v3.9.0
-          #image: localhost:30002/jenkins:2.263.1-lts
           ports:
               #- name: ui
             - containerPort: 5076
               protocol: TCP
-
           volumeMounts:
             - name: media-search-config
               mountPath: /config
-
             - name: media-download
               mountPath: /downloads
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+      priorityClassName: high-priority
       volumes:
         - name: media-search-config
           persistentVolumeClaim:

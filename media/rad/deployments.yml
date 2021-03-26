@@ -35,6 +35,14 @@ spec:
               mountPath: /downloads
             - name: media-content
               mountPath: /tv
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+      priorityClassName: high-priority
       volumes:
         - name: media-rad-config
           persistentVolumeClaim:

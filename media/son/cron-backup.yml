@@ -42,6 +42,8 @@ spec:
                 value: '30'
               - name: BACKUP_DEBUG
                 value: 'true'
+              - name: BACKUP_GEN_JOB_DIR
+                value: 'true'
               - name: BACKUP_WEBHOOK
                 valueFrom:
                   secretKeyRef:

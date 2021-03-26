@@ -23,7 +23,6 @@ spec:
       containers:
         - name: media-son
           image: linuxserver/sonarr:version-2.0.0.5344
-          #image: localhost:30002/jenkins:2.263.1-lts
           ports:
               #- name: ui
             - containerPort: 8989
@@ -37,6 +36,14 @@ spec:
               mountPath: /downloads
             - name: media-content
               mountPath: /tv
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+      priorityClassName: high-priority
       volumes:
         - name: media-son-config
           persistentVolumeClaim:
