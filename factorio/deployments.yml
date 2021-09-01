@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: factoriotools/factorio:1.1.21
+          image: factoriotools/factorio:1.1.32
           securityContext:
             runAsUser: 845
           ports:

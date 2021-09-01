@@ -23,6 +23,17 @@ spec:
   nfs:
     path: /mnt/data/jenkins/data
     server: 192.168.1.222
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - k8sn02
+          - k8sn03
+          - k8sn04
+
 
 #---
 #apiVersion: v1

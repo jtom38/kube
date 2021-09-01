@@ -20,9 +20,13 @@ spec:
         app: media-get
 
     spec:
+      dnsConfig:
+        nameservers:
+          - 8.8.8.8
       containers:
         - name: media-get
-          image: linuxserver/nzbget:v21.0-ls48
+          #image: linuxserver/nzbget:v21.0-ls48
+          image: linuxserver/nzbget:amd64-v21.1-ls90
           ports:
               #- name: ui
             - containerPort: 6789
@@ -38,7 +42,7 @@ spec:
               memory: "256Mi"
               cpu: "250m"
             limits:
-              memory: "512Mi"
+              memory: "900Mi"
               cpu: "500m"
       priorityClassName: high-priority
       volumes:
