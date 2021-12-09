@@ -20,8 +20,8 @@ spec:
     spec:
       containers:
         - name: invmon-api
-          image: ghcr.io/jtom38/invmon-api:master
-          imagePullPolicy: Always
+          image: ghcr.io/jtom38/invmon-api:v0.1.0
+          #imagePullPolicy: Always
           resources:
             requests:
               memory: "256Mi"
