@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: invmon-api-01-config-template
+  namespace: default
+data:
+  INVMON_DATABASE_NAME: "postgres"
+  INVMON_DATABASE_TYPE: "postgres"
+  INVMON_DATABASE_USERNAME: "postgres"
+  INVMON_DATABASE_PASSWORD: "postgres"
+
+  # Use the ip address if kube is not able to route to the pihole
+  INVMON_DATABASE_HOST: "localhost"
+
+  INVMON_SMTP_HOST: "smtp.gmail.com"
+  INVMON_SMTP_PORT: "587"
+  INVMON_SMTP_USERNAME: "addess@gmail.com"
+  INVMON_SMTP_PASSWORD: "password"

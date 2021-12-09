@@ -1,0 +1,19 @@
+---
+#  This service lets you access the web ui from outside the cluster
+apiVersion: v1
+kind: Service
+metadata:
+  name: invmon-api-access-tcp
+  annotations:
+    metallb.universe.tf/allow-shared-ip: invmon-api-access-tcp
+
+spec:
+  selector:
+    app: invmon-api-01
+  loadBalancerIP: 192.168.1.205
+  type: LoadBalancer
+  ports:
+    - port: 8050
+      targetPort: 8050
+      protocol: TCP
+      name: access01

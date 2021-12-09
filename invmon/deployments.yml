@@ -1,0 +1,38 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: invmon-api-01
+  labels:
+    app: invmon-api-01
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: invmon-api-01
+  template:
+    metadata:
+      labels:
+        app: invmon-api-01
+    spec:
+      containers:
+        - name: invmon-api
+          image: ghcr.io/jtom38/invmon-api:v0.1.0
+          #imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "256m"
+            limits:
+              memory: "3Gi"
+              cpu: "1000m"
+          envFrom:
+            - configMapRef:
+                name: invmon-api-01-config
+          ports:
+            - containerPort: 8050
+              protocol: TCP
+
