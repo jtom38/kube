@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: newsbot01-config-template
+  name: newsbot-worker-01-config-template
   namespace: default
 data:
   NEWSBOT_POGO_ENABLED: 'true'

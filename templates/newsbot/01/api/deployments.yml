@@ -1,0 +1,48 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: newsbot-api-01
+  labels:
+    app: newsbot-api-01
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: newsbot-api-01
+  template:
+    metadata:
+      labels:
+        app: newsbot-api-01
+    spec:
+      containers:
+        - name: newsbot-api
+          image: ghcr.io/jtom38/newsbot.api:master
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "256m"
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+          env:
+            - name: NEWSBOT_DATABASE_NAME
+              value: 'newsbot.api'
+            - name: NEWSBOT_DATABASE_TYPE
+              value: 'sqlite'
+            - name: NEWSBOT_DATABASE_PATH
+              value: '/'
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          volumeMounts:
+            - name: newsbot01-db
+              mountPath: /app/mounts/database
+      volumes:
+        - name: newsbot01-db
+          persistentVolumeClaim:
+            claimName: newsbot01-db-pvc
+
