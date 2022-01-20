@@ -1,0 +1,35 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: newsbot-worker-01
+  labels:
+    app: newsbot01-worker-01
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: newsbot-worker-01
+  template:
+    metadata:
+      labels:
+        app: newsbot-worker-01
+    spec:
+      containers:
+        - name: newsbot-worker
+          #image: jtom38/newsbot:0.6.0
+          image: ghcr.io/jtom38/newsbot.worker:master
+          envFrom:
+            - configMapRef:
+                name: newsbot-worker-01-config
+          resources:
+            requests:
+              memory: "3Gi"
+              cpu: "250m"
+            limits:
+              memory: "4Gi"
+              cpu: "1000m"
+

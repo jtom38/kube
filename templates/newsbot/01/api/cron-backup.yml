@@ -15,7 +15,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: cron-newsbot01-backup
+  name: cron-newsbot-api-01-backup
 spec:
   schedule: "10 3 * * *"
   jobTemplate:
