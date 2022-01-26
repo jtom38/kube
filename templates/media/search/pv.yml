@@ -19,6 +19,7 @@ spec:
   #  server: 192.168.1.222
   local:
     path: /kube/search/config
+    
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -26,7 +27,7 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - k8sn02
+          - k8sn01
 
 ---
 apiVersion: v1

@@ -39,6 +39,11 @@ spec:
             limits:
               memory: "512Mi"
               cpu: "500m"
+      
+      # Force the pod to use external DNS
+      dnsConfig:
+        nameservers:
+          - 8.8.8.8
       priorityClassName: high-priority
       volumes:
         - name: media-search-config
