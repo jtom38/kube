@@ -1,24 +1,23 @@
 ---
 apiVersion: v1
 kind: PersistentVolume
-
 metadata:
-  name: media-search-config
-
+  name: media-son-config
 spec:
   capacity:
     storage: 10Gi
   volumeMode: Filesystem
   accessModes:
-    - ReadWriteMany
+  - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: media-search-config
-  
+  storageClassName: media-son-config
+
   #nfs:
-  #  path: /mnt/data/kube/media/search/config
+  #  path: /mnt/data/media/son/config
   #  server: 192.168.1.222
+
   local:
-    path: /kube/search/config
+    path: /kube/son/config
     
   nodeAffinity:
     required:
@@ -30,22 +29,14 @@ spec:
           - k8sn01
 
 ---
+kind: PersistentVolumeClaim
 apiVersion: v1
-kind: PersistentVolume
-
 metadata:
-  name: media-search-download
-
+  name: media-son-config-pvc
 spec:
-  capacity:
-    storage: 100Gi
-  volumeMode: Filesystem
   accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: media-download
-  nfs:
-    path: /mnt/data/media/download
-    server: 192.168.1.222
-
-
+  - ReadWriteMany
+  storageClassName: media-son-config
+  resources:
+    requests:
+      storage: 10Gi

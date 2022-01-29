@@ -18,6 +18,7 @@ spec:
 
   local:
     path: /kube/rad/config
+
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -25,7 +26,7 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - k8sn03
+          - k8sn01
 
 ---
 apiVersion: v1
